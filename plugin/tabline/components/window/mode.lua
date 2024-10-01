@@ -7,6 +7,6 @@ return {
     else
       mode = key_table:gsub('_mode', ''):upper()
     end
-    return mode
+    return "testing"
   end,
 }
