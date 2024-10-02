@@ -1,7 +1,8 @@
 return {
   update = function(window)
+    local wezterm = require('wezterm')
     if window:leader_is_active() then
-      return "LEADER"
+      return wezterm.nerdfonts.cod_layers
     end
   end,
 }
