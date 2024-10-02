@@ -21,7 +21,7 @@ local tabline_a, tabline_b, tabline_c, tabline_x, tabline_y, tabline_z = {}, {},
 
 local function create_attributes(window)
   local mode = 'normal_mode'
-  if window.leader_is_active() then
+  if window:leader_is_active() then
     mode = 'leader_mode'
   else
     mode = window:active_key_table() or 'normal_mode'
