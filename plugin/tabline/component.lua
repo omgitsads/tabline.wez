@@ -20,7 +20,12 @@ local section_seperator_attributes_a, section_seperator_attributes_b, section_se
 local tabline_a, tabline_b, tabline_c, tabline_x, tabline_y, tabline_z = {}, {}, {}, {}, {}, {}
 
 local function create_attributes(window)
-  local mode = window:active_key_table() or 'normal_mode'
+  local mode = 'normal_mode'
+  if window.leader_is_active then
+    mode = 'leader_mode'
+  else
+    mode = window:active_key_table() or 'normal_mode'
+  end
   local colors = config.colors[mode]
   for _, ext in pairs(extension.extensions) do
     if ext.colors then
