@@ -35,12 +35,12 @@ function M.setup(opts)
   require('tabline.config').set(opts)
 
   wezterm.on('update-status', function(window)
-    --require('tabline.component').set_status(window)
+    require('tabline.component').set_status(window)
     window.set_left_status(window:active_key_table())
   end)
 
   wezterm.on('format-tab-title', function(tab, _, _, _, hover, _)
-    --return require('tabline.tabs').set_title(tab, hover)
+    return require('tabline.tabs').set_title(tab, hover)
   end)
 
   require('tabline.extension').load()
