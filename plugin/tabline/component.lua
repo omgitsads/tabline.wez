@@ -14,10 +14,10 @@ local left_component_separator =
 local right_component_separator =
   { Text = config.opts.options.component_separators.right or config.opts.options.component_separators }
 
-local attributes_a, attributes_b, attributes_c, attributes_x, attributes_y, attributes_z = {}, {}, {}, {}, {}, {}
-local section_seperator_attributes_a, section_seperator_attributes_b, section_seperator_attributes_c, section_seperator_attributes_x, section_seperator_attributes_y, section_seperator_attributes_z =
-  {}, {}, {}, {}, {}, {}
-local tabline_a, tabline_b, tabline_c, tabline_x, tabline_y, tabline_z = {}, {}, {}, {}, {}, {}
+local attributes_leader, attributes_a, attributes_b, attributes_c, attributes_x, attributes_y, attributes_z = {}, {}, {}, {}, {}, {}, {}
+local section_seperator_attributes_leader, section_seperator_attributes_a, section_seperator_attributes_b, section_seperator_attributes_c, section_seperator_attributes_x, section_seperator_attributes_y, section_seperator_attributes_z =
+  {}, {}, {}, {}, {}, {}, {}
+local tabline_leader, tabline_a, tabline_b, tabline_c, tabline_x, tabline_y, tabline_z = {}, {}, {}, {}, {}, {}, {}
 
 local function create_attributes(window)
   local mode = 'normal_mode'
@@ -28,6 +28,11 @@ local function create_attributes(window)
       colors = util.deep_extend(util.deep_copy(colors), ext.colors)
     end
   end
+  attributes_leader = {
+    { Foreground = { Color = colors.leader.fg } },
+    { Background = { Color = colors.leader.bg } },
+    { Attribute = { Intensity = 'Bold' } },
+  }
   attributes_a = {
     { Foreground = { Color = colors.a.fg } },
     { Background = { Color = colors.a.bg } },
@@ -55,6 +60,10 @@ local function create_attributes(window)
     { Foreground = { Color = colors.z and colors.z.fg or colors.a.fg } },
     { Background = { Color = colors.z and colors.z.bg or colors.a.bg } },
     { Attribute = { Intensity = 'Bold' } },
+  }
+  section_seperator_attributes_leader = {
+    { Foreground = { Color = colors.leader.bg } },
+     
   }
   section_seperator_attributes_a = {
     { Foreground = { Color = colors.a.bg } },
@@ -101,6 +110,7 @@ local function create_sections(window)
       sections = util.deep_extend(util.deep_copy(sections), ext.sections)
     end
   end
+  tabline_leader = insert_component_separators(util.extract_components({ 'leader' }, attributes_leader, window), true)
   tabline_a = insert_component_separators(util.extract_components(sections.tabline_a, attributes_a, window), true)
   tabline_b = insert_component_separators(util.extract_components(sections.tabline_b, attributes_b, window), true)
   tabline_c = insert_component_separators(util.extract_components(sections.tabline_c, attributes_c, window), true)
@@ -139,6 +149,10 @@ end
 
 local function left_section()
   local result = {}
+  if #tabline_leader > 0 then
+    util.insert_elements(result, attributes_leader)
+    util.insert_elements(result, tabline_leader)
+  end
   if #tabline_a > 0 then
     util.insert_elements(result, attributes_a)
     util.insert_elements(result, tabline_a)

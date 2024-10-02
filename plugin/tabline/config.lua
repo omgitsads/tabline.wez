@@ -82,6 +82,11 @@ local function get_colors(theme)
   end
 
   return {
+    leader= {
+      a = { fg = mantle, bg = pink },
+      b = { fg = pink, bg = surface0 },
+      c = { fg = text, bg = mantle },
+    },
     normal_mode = {
       a = { fg = mantle, bg = blue },
       b = { fg = blue, bg = surface0 },
@@ -95,11 +100,6 @@ local function get_colors(theme)
     search_mode = {
       a = { fg = mantle, bg = green },
       b = { fg = green, bg = surface0 },
-      c = { fg = text, bg = mantle },
-    },
-    leader_mode = {
-      a = { fg = mantle, bg = pink },
-      b = { fg = pink, bg = surface0 },
       c = { fg = text, bg = mantle },
     },
     tab = {
