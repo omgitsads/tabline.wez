@@ -169,7 +169,8 @@ function M.set_status(window)
   create_attributes(window)
   create_sections(window)
   window:set_left_status(wezterm.format(left_section()))
-  window:set_right_status(wezterm.format(right_section()))
+  window:set_right_status(window:active_key_table())
+  --window:set_right_status(wezterm.format(right_section()))
 end
 
 return M
