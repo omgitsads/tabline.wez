@@ -149,11 +149,10 @@ end
 
 local function left_section()
   local result = {}
-  if #tabline_leader > 0 then
-    util.insert_elements(result, attributes_leader)
-    util.insert_elements(result, tabline_leader)
-  end
+  util.insert_elements(result, attributes_leader)
+  util.insert_elements(result, tabline_leader)
   if #tabline_a > 0 then
+    util.insert_elements(result, section_seperator_attributes_leader)
     util.insert_elements(result, attributes_a)
     util.insert_elements(result, tabline_a)
   end
