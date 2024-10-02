@@ -99,7 +99,7 @@ local function get_colors(theme)
     },
     leader_mode = {
       a = { fg = mantle, bg = pink },
-      b = { fg = blue, bg = surface0 },
+      b = { fg = pink, bg = surface0 },
       c = { fg = text, bg = mantle },
     },
     tab = {
